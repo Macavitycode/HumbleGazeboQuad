@@ -1,0 +1,16 @@
+*
+
+!.gitignore
+
+!*.sh
+!stltomoi
+!stltomoi/**
+
+stltomoi/test
+
+!src/
+!src/**
+
+**/.ipynb_checkpoints
+
+!**/*.md

@@ -1,0 +1,346 @@
+<?xml version="1.0"?>
+<sdf version='1.9'>
+    <model name='drone_model'>
+        <pose>0 0 0 0 0 0</pose>
+        <static>false</static>
+
+        <link name="base_link"> 
+            <must_be_base_link>true</must_be_base_link>
+            <self_collide>false</self_collide>
+        </link>
+
+        <joint name="base_joint" type="fixed">
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <parent>base_link</parent>
+            <child>frame</child>
+            <pose>0 0 0 0 0 0</pose>
+        </joint>
+
+        <link name="frame">
+            <self_collide>false</self_collide>
+            <pose>0 0 0 0 0 0</pose>
+            <inertial>
+                <mass>0.5</mass>
+                <inertia>
+                    <ixx>1.26297701e-05</ixx>
+                    <ixy>-5.18156941e-17</ixy>
+                    <ixz>-1.37610761e-08</ixz>
+                    <iyy>1.36983673e-05</iyy>
+                    <iyz>3.96565331e-15</iyz>
+                    <izz>2.61209100e-05</izz>
+                </inertia>
+            </inertial>
+            <collision name="frame_collision">
+                <max_contacts>4</max_contacts>
+                <geometry>
+                    <mesh>
+                        <scale>0.001 0.001 0.001</scale>
+                        <uri>package://d1/meshes/body.stl</uri>
+                    </mesh>
+                </geometry>
+                <surface>
+                    <friction>
+                        <ode>
+                            <mu>1</mu>
+                            <mu2>1</mu2>
+                        </ode>
+                    </friction>
+                    <contact>
+                        <colliide_without_contact>true</colliide_without_contact>
+                    </contact>
+                </surface>
+            </collision>
+            <visual name="frame_visual">
+                <cast_shadows>false</cast_shadows>
+                <geometry>
+                    <mesh>
+                        <scale>0.001 0.001 0.001</scale>
+                        <uri>package://d1/meshes/body.stl</uri>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1 0 0 1</diffuse>
+                    <script>
+                        <name>Gazebo/Red</name>
+                        <uri>file://media/materials/scripts/gazebo.material</uri>
+                    </script>
+                </material>
+            </visual>
+
+            <sensor name="camera" type="camera">
+                <pose>0.15 0 0 0 0 0</pose>
+                <always_on>1</always_on>
+                <update_rate>20</update_rate>
+                <camera name="camera">
+                    <horizontal_fov>1.0472</horizontal_fov>
+                    <lens>
+                        <intrinsics>
+                            <fx>1108.5</fx>
+                            <fy>1108.5</fy>
+                            <cx>640.5</cx>
+                            <cy>480.5</cy>
+                            <s>0</s>
+                        </intrinsics>
+                    </lens>
+                    <distortion>
+                        <k1>0.0</k1>
+                        <k2>0.0</k2>
+                        <k3>0.0</k3>
+                        <p1>0.0</p1>
+                        <p2>0.0</p2>
+                        <center>0.5 0.5</center>
+                    </distortion>
+                    <image>
+                        <width>1260</width>
+                        <height>720</height>
+                        <format>R8G8B8</format>
+                    </image>
+                    <clip>
+                        <near>0.01</near>
+                        <far>300</far>
+                    </clip>
+                    <noise>
+                        <type>gaussian</type>
+                        <mean>0</mean>
+                        <stddev>0.007</stddev>
+                    </noise>
+                </camera>
+            </sensor>
+
+            <sensor name="imu_sensor" type="imu">
+                <always_on>1</always_on>
+                <update_rate>10</update_rate>
+                <visualize>true</visualize>
+                <topic>model/drone_model/imu</topic>
+            </sensor>
+        </link>
+
+        <link name="prop0">
+            <pose>0.0835 0.0835 0 0 0 0</pose>
+            <inertial>
+                <mass>0.15</mass>
+                <inertia>
+                    <ixx>2.28759986e-10</ixx>
+                    <ixy>-2.13167562e-18</ixy>
+                    <ixz>-1.90163023e-19</ixz>
+                    <iyy>2.28759967e-10</iyy>
+                    <iyz>1.98727288e-19</iyz>
+                    <izz>4.52746349e-10</izz>
+                </inertia>
+            </inertial>
+            <collision name="prop0_collision">
+                <max_contacts>4</max_contacts>
+                <geometry>
+                    <mesh>
+                        <scale>0.0019 0.0019 0.0019</scale>
+                        <uri>package://d1/meshes/prop_cw.stl</uri>
+                    </mesh>
+                </geometry>
+                <surface>
+                    <friction>
+                        <ode>
+                            <mu>1</mu>
+                            <mu2>1</mu2>
+                        </ode>
+                    </friction>
+                    <contact>
+                        <colliide_without_contact>true</colliide_without_contact>
+                    </contact>
+                </surface>
+            </collision>
+            <visual name="prop0_visual">
+                <cast_shadows>false</cast_shadows>
+                <geometry>
+                    <mesh>
+                        <scale>0.0019 0.0019 0.0019</scale>
+                        <uri>package://d1/meshes/prop_cw.stl</uri>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>0 1 0 1</diffuse>
+                    <script>
+                        <name>Gazebo/Green</name>
+                        <uri>file://media/materials/scripts/gazebo.material</uri>
+                    </script>
+                </material>
+            </visual>
+        </link>
+        
+        <link name="prop1">
+            <pose>0.0835 -0.0835 0 0 0 0</pose>
+            <inertial>
+                <mass>0.15</mass>
+                <inertia>
+                    <ixx>2.28759986e-10</ixx>
+                    <ixy>3.92098607e-19</ixy>
+                    <ixz>-1.94870584e-19</ixz>
+                    <iyy>2.28759963e-10</iyy>
+                    <iyz>-3.11172300e-19</iyz>
+                    <izz>4.52746346e-10</izz>
+                </inertia>
+            </inertial>
+            <collision name="prop1_collision">
+                <max_contacts>4</max_contacts>
+                <geometry>
+                    <mesh>
+                        <scale>0.0019 0.0019 0.0019</scale>
+                        <uri>package://d1/meshes/prop_ccw.stl</uri>
+                    </mesh>
+                </geometry>
+                <surface>
+                    <friction>
+                        <ode>
+                            <mu>1</mu>
+                            <mu2>1</mu2>
+                        </ode>
+                    </friction>
+                    <contact>
+                        <colliide_without_contact>true</colliide_without_contact>
+                    </contact>
+                </surface>
+            </collision>
+            <visual name="prop1_visual">
+                <cast_shadows>false</cast_shadows>
+                <geometry>
+                    <mesh>
+                        <scale>0.0019 0.0019 0.0019</scale>
+                        <uri>package://d1/meshes/prop_ccw.stl</uri>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>0 0 1 1</diffuse>
+                    <script>
+                        <name>Gazebo/Blue</name>
+                        <uri>file://media/materials/scripts/gazebo.material</uri>
+                    </script>
+                </material>
+            </visual>
+        </link>
+
+        <link name="prop2">
+            <pose>-0.0835 0.0835 0 0 0 0</pose>
+            <inertial>
+                <mass>0.15</mass>
+                <inertia>
+                    <ixx>2.28759986e-10</ixx>
+                    <ixy>3.92098607e-19</ixy>
+                    <ixz>-1.94870584e-19</ixz>
+                    <iyy>2.28759963e-10</iyy>
+                    <iyz>-3.11172300e-19</iyz>
+                    <izz>4.52746346e-10</izz>
+                </inertia>
+            </inertial>
+            <collision name="prop2_collision">
+                <max_contacts>4</max_contacts>
+                <geometry>
+                    <mesh>
+                        <scale>0.0019 0.0019 0.0019</scale>
+                        <uri>package://d1/meshes/prop_ccw.stl</uri>
+                    </mesh>
+                </geometry>
+                <surface>
+                    <friction>
+                        <ode>
+                            <mu>1</mu>
+                            <mu2>1</mu2>
+                        </ode>
+                    </friction>
+                    <contact>
+                        <colliide_without_contact>true</colliide_without_contact>
+                    </contact>
+                </surface>
+            </collision>
+            <visual name="prop2_visual">
+                <cast_shadows>false</cast_shadows>
+                <geometry>
+                    <mesh>
+                        <scale>0.0019 0.0019 0.0019</scale>
+                        <uri>package://d1/meshes/prop_ccw.stl</uri>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>0 0 1 1</diffuse>
+                    <script>
+                        <name>Gazebo/Blue</name>
+                        <uri>file://media/materials/scripts/gazebo.material</uri>
+                    </script>
+                </material>
+            </visual>
+        </link>
+
+        <link name="prop3">
+            <pose>-0.0835 -0.0835 0 0 0 0</pose>
+            <inertial>
+                <mass>0.15</mass>
+                <inertia>
+                    <ixx>2.28759986e-10</ixx>
+                    <ixy>-2.13167562e-18</ixy>
+                    <ixz>-1.90163023e-19</ixz>
+                    <iyy>2.28759967e-10</iyy>
+                    <iyz>1.98727288e-19</iyz>
+                    <izz>4.52746349e-10</izz>
+                </inertia>
+            </inertial>
+            <collision name="prop3_collision">
+                <max_contacts>4</max_contacts>
+                <geometry>
+                    <mesh>
+                        <scale>0.0019 0.0019 0.0019</scale>
+                        <uri>package://d1/meshes/prop_cw.stl</uri>
+                    </mesh>
+                </geometry>
+                <surface>
+                    <friction>
+                        <ode>
+                            <mu>1</mu>
+                            <mu2>1</mu2>
+                        </ode>
+                    </friction>
+                    <contact>
+                        <colliide_without_contact>true</colliide_without_contact>
+                    </contact>
+                </surface>
+            </collision>
+            <visual name="prop3_visual">
+                <cast_shadows>false</cast_shadows>
+                <geometry>
+                    <mesh>
+                        <scale>0.0019 0.0019 0.0019</scale>
+                        <uri>package://d1/meshes/prop_cw.stl</uri>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>0 1 0 1</diffuse>
+                    <script>
+                        <name>Gazebo/Green</name>
+                        <uri>file://media/materials/scripts/gazebo.material</uri>
+                    </script>
+                </material>
+            </visual>
+        </link>
+        <joint name="prop0_joint" type="revolute">
+            <parent>frame</parent>
+            <child>prop0</child>
+            <axis><xyz>0 0 1</xyz></axis>
+            <pose relative_to='prop0'/>
+        </joint>
+        <joint name="prop1_joint" type="revolute">
+            <parent>frame</parent>
+            <child>prop1</child>
+            <axis><xyz>0 0 1</xyz></axis>
+            <pose relative_to='prop1'/>
+        </joint>
+        <joint name="prop2_joint" type="revolute">
+            <parent>frame</parent>
+            <child>prop2</child>
+            <axis><xyz>0 0 1</xyz></axis>
+            <pose relative_to='prop2'/>
+        </joint>
+        <joint name="prop3_joint" type="revolute">
+            <parent>frame</parent>
+            <child>prop3</child>
+            <axis><xyz>0 0 1</xyz></axis>
+            <pose relative_to='prop3'/>
+        </joint>
+    </model>
+</sdf>
